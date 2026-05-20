@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfekt & Präteritum — Bahasa Jerman</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --cream: #f5f0e8;
+    --gold: #c9a84c;
+    --red: #c0392b;
+    --blue: #2980b9;
+    --green: #27ae60;
+    --surface: #ffffff;
+    --muted: #7a7a8c;
+    --border: #e0d8cc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(201,168,76,0.06) 40px,
+      rgba(201,168,76,0.06) 41px
+    );
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    position: relative;
+  }
+  header h1 span { color: var(--gold); }
+  header p {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.6);
+    margin-top: 0.5rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  /* NAV TABS */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    flex-wrap: wrap;
+  }
+  nav button {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  nav button:hover { color: var(--cream); }
+  nav button.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* MAIN CONTENT */
+  main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .tab-panel { display: none; animation: fadeIn 0.3s ease; }
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION HEADER */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-title .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: var(--ink);
+  }
+  .card p { color: #444; line-height: 1.7; font-size: 0.95rem; }
+
+  /* INFO BOX */
+  .info-box {
+    border-left: 4px solid var(--gold);
+    background: rgba(201,168,76,0.08);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .info-box.blue { border-color: var(--blue); background: rgba(41,128,185,0.07); }
+  .info-box.red { border-color: var(--red); background: rgba(192,57,43,0.07); }
+  .info-box.green { border-color: var(--green); background: rgba(39,174,96,0.08); }
+
+  /* FORMULA BOX */
+  .formula {
+    font-family: 'DM Mono', monospace;
+    background: var(--ink);
+    color: var(--gold);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  /* TABLES */
+  .tbl-wrap { overflow-x: auto; margin: 1rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    background: var(--ink);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+  td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: #333;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+  td code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--red);
+    background: rgba(192,57,43,0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+  td em { color: var(--muted); font-style: italic; font-size: 0.85rem; }
+
+  /* EXAMPLE SENTENCES */
+  .examples { list-style: none; margin: 0.75rem 0; }
+  .examples li {
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+  .examples li:last-child { border-bottom: none; }
+  .examples .de { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--ink); }
+  .examples .id { color: var(--muted); font-style: italic; }
+
+  /* COMPARISON TABLE */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .compare-col {
+    border-radius: 10px;
+    padding: 1.25rem;
+    border: 2px solid;
+  }
+  .compare-col.perfekt { border-color: var(--blue); background: rgba(41,128,185,0.05); }
+  .compare-col.praet { border-color: var(--red); background: rgba(192,57,43,0.05); }
+  .compare-col h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  .compare-col.perfekt h4 { color: var(--blue); }
+  .compare-col.praet h4 { color: var(--red); }
+  .compare-col ul { list-style: none; }
+  .compare-col ul li {
+    font-size: 0.88rem;
+    color: #444;
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .compare-col ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  /* ===== QUIZ ===== */
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .quiz-question {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+  .quiz-question .blank {
+    display: inline-block;
+    border-bottom: 2px solid var(--gold);
+    min-width: 80px;
+    color: var(--gold);
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    padding: 0 4px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 0.6rem; }
+  .quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.9rem;
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    text-align: left;
+  }
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .quiz-option .key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--border);
+    border-radius: 4px;
+    padding: 0.1rem 0.5rem;
+    min-width: 28px;
+    text-align: center;
+    font-weight: 500;
+  }
+  .quiz-option.correct {
+    border-color: var(--green);
+    background: rgba(39,174,96,0.1);
+  }
+  .quiz-option.correct .key { background: var(--green); color: white; }
+  .quiz-option.wrong {
+    border-color: var(--red);
+    background: rgba(192,57,43,0.08);
+  }
+  .quiz-option.wrong .key { background: var(--red); color: white; }
+  .quiz-option:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 0.75rem;
+    font-size: 0.88rem;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    display: none;
+    line-height: 1.5;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: rgba(39,174,96,0.12); color: #1a6b3a; }
+  .quiz-feedback.wrong { background: rgba(192,57,43,0.1); color: #8b1a0e; }
+
+  .quiz-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  /* SCORE BAR */
+  #score-display {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .score-stat { text-align: center; }
+  .score-stat .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .score-stat .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.5);
+    margin-top: 0.25rem;
+  }
+  .score-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.15); }
+
+  /* RESET BTN */
+  .btn-reset {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: block;
+    margin: 1.5rem auto 0;
+  }
+  .btn-reset:hover { opacity: 0.85; }
+
+  /* PARTIZIP BUILDER */
+  .builder-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .builder-input {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .builder-input input {
+    flex: 1;
+    min-width: 180px;
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .builder-input input:focus { border-color: var(--gold); }
+  .builder-input select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+    cursor: pointer;
+  }
+  .btn-check {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: var(--ink);
+    color: var(--gold);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .btn-check:hover { opacity: 0.8; }
+  .builder-result {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    display: none;
+  }
+  .builder-result.show { display: block; }
+  .builder-result.ok { background: rgba(39,174,96,0.12); color: #1a6b3a; }
+  .builder-result.err { background: rgba(192,57,43,0.1); color: #8b1a0e; }
+
+  /* IRREGULAR TABLE SEARCH */
+  #irr-search {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+  #irr-search:focus { border-color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .compare-grid { grid-template-columns: 1fr; }
+    .examples li { grid-template-columns: 1fr; gap: 0.25rem; }
+    nav button { padding: 0.75rem 0.9rem; font-size: 0.78rem; }
+    .score-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Perfekt <span>&</span> Präteritum</h1>
+  <p>Materi Interaktif Bahasa Jerman · Bentuk Lampau</p>
+</header>
+
+<nav>
+  <button class="active" onclick="showTab('perfekt')">Perfekt</button>
+  <button onclick="showTab('praeteritum')">Präteritum</button>
+  <button onclick="showTab('vergleich')">Perbandingan</button>
+  <button onclick="showTab('latihan')">Soal Latihan</button>
+  <button onclick="showTab('partizip')">Partizip II</button>
+</nav>
+
+<main>
+
+<!-- ========== TAB: PERFEKT ========== -->
+<div class="tab-panel active" id="tab-perfekt">
+
+  <div class="section-title">
+    Perfekt <span class="badge">Lisan · Informal</span>
+  </div>
+
+  <div class="card">
+    <h3>Apa itu Perfekt?</h3>
+    <p>Perfekt adalah bentuk lampau yang digunakan dalam <strong>percakapan sehari-hari</strong>, pesan singkat, dan tulisan informal. Perfekt menunjukkan bahwa sebuah kejadian sudah selesai di masa lalu.</p>
+    <div class="info-box">
+      📢 <strong>Kapan digunakan?</strong><br>
+      Percakapan lisan · Chat / pesan · Cerita informal · Hampir semua verba kecuali sein, haben, dan Modalverben
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Rumus Perfekt</h3>
+    <div class="formula">haben / sein (terkonjugasi) + Partizip II</div>
+    <div class="info-box blue">
+      🔵 <strong>Pakai HABEN:</strong> sebagian besar verba (transitif, tidak berpindah tempat)<br>
+      🔴 <strong>Pakai SEIN:</strong> verba gerak berpindah tempat (gehen, fahren, fliegen, kommen) + perubahan kondisi (aufwachen, sterben, werden)
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Konjugasi haben & sein</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Subjek</th><th>haben</th><th>sein</th></tr></thead>
+        <tbody>
+          <tr><td>ich</td><td><code>habe</code></td><td><code>bin</code></td></tr>
+          <tr><td>du</td><td><code>hast</code></td><td><code>bist</code></td></tr>
+          <tr><td>er/sie/es</td><td><code>hat</code></td><td><code>ist</code></td></tr>
+          <tr><td>wir</td><td><code>haben</code></td><td><code>sind</code></td></tr>
+          <tr><td>ihr</td><td><code>habt</code></td><td><code>seid</code></td></tr>
+          <tr><td>sie/Sie</td><td><code>haben</code></td><td><code>sind</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Pembentukan Partizip II</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Jenis Verba</th><th>Rumus</th><th>Infinitiv → Partizip II</th></tr></thead>
+        <tbody>
+          <tr><td>Reguler biasa</td><td>ge- + Stamm + -t</td><td><em>machen → <code>gemacht</code></em></td></tr>
+          <tr><td>Reguler trennbar</td><td>Präfix + ge + Stamm + -t</td><td><em>aufmachen → <code>aufgemacht</code></em></td></tr>
+          <tr><td>Reguler tidak trennbar</td><td>Stamm + -t (tanpa ge-)</td><td><em>bestellen → <code>bestellt</code></em></td></tr>
+          <tr><td>Irregulär</td><td>ge- + Stamm (berubah) + -en</td><td><em>fahren → <code>gefahren</code></em></td></tr>
+          <tr><td>Irregulär trennbar</td><td>Präfix + ge + Stamm (berubah) + -en</td><td><em>einschlafen → <code>eingeschlafen</code></em></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Contoh Kalimat</h3>
+    <ul class="examples">
+      <li><span class="de">Ich habe gestern Fußball gespielt.</span><span class="id">Saya bermain sepak bola kemarin.</span></li>
+      <li><span class="de">Er hat einen Film gesehen.</span><span class="id">Dia (laki-laki) menonton film.</span></li>
+      <li><span class="de">Wir sind nach Berlin gefahren.</span><span class="id">Kami pergi ke Berlin.</span></li>
+      <li><span class="de">Sie ist früh aufgewacht.</span><span class="id">Dia (perempuan) bangun pagi-pagi.</span></li>
+      <li><span class="de">Hast du das Buch gelesen?</span><span class="id">Apakah kamu sudah membaca bukunya?</span></li>
+      <li><span class="de">Das Kind hat viel gegessen.</span><span class="id">Anak itu makan banyak.</span></li>
+    </ul>
+  </div>
+
+
+
+</div>
+
+<!-- ========== TAB: PRÄTERITUM ========== -->
+<div class="tab-panel" id="tab-praeteritum">
+
+  <div class="section-title">
+    Präteritum <span class="badge">Tulisan · Formal</span>
+  </div>
+
+  <div class="card">
+    <h3>Apa itu Präteritum?</h3>
+    <p>Präteritum adalah bentuk lampau yang digunakan dalam <strong>tulisan formal, sastra, berita, dan narasi</strong>. Dalam percakapan, Präteritum biasanya hanya dipakai untuk sein, haben, dan Modalverben.</p>
+    <div class="info-box red">
+      📰 <strong>Kapan digunakan?</strong><br>
+      Teks narasi · Berita & laporan · Novel & sastra · Laporan resmi
+      <br><br>
+      ⚠️ <strong>Pengecualian wajib hafal:</strong> sein, haben, dan Modalverben (können, müssen, dürfen, sollen, wollen, mögen) → <em>selalu</em> pakai Präteritum bahkan dalam percakapan!
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Rumus Präteritum — Verba Reguler</h3>
+    <div class="formula">Verbstamm + -te / -test / -ten / -tet</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Subjek</th><th>machen</th><th>spielen</th></tr></thead>
+        <tbody>
+          <tr><td>ich</td><td><code>machte</code></td><td><code>spielte</code></td></tr>
+          <tr><td>du</td><td><code>machtest</code></td><td><code>spieltest</code></td></tr>
+          <tr><td>er/sie/es</td><td><code>machte</code></td><td><code>spielte</code></td></tr>
+          <tr><td>wir</td><td><code>machten</code></td><td><code>spielten</code></td></tr>
+          <tr><td>ihr</td><td><code>machtet</code></td><td><code>spieltet</code></td></tr>
+          <tr><td>sie/Sie</td><td><code>machten</code></td><td><code>spielten</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>sein · haben · werden (Wajib Hafal!)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Subjek</th><th>sein</th><th>haben</th><th>werden</th></tr></thead>
+        <tbody>
+          <tr><td>ich</td><td><code>war</code></td><td><code>hatte</code></td><td><code>wurde</code></td></tr>
+          <tr><td>du</td><td><code>warst</code></td><td><code>hattest</code></td><td><code>wurdest</code></td></tr>
+          <tr><td>er/sie/es</td><td><code>war</code></td><td><code>hatte</code></td><td><code>wurde</code></td></tr>
+          <tr><td>wir</td><td><code>waren</code></td><td><code>hatten</code></td><td><code>wurden</code></td></tr>
+          <tr><td>ihr</td><td><code>wart</code></td><td><code>hattet</code></td><td><code>wurdet</code></td></tr>
+          <tr><td>sie/Sie</td><td><code>waren</code></td><td><code>hatten</code></td><td><code>wurden</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Modalverben — Präteritum</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Infinitiv</th><th>ich/er/es</th><th>du</th><th>wir/sie/Sie</th></tr></thead>
+        <tbody>
+          <tr><td>können</td><td><code>konnte</code></td><td><code>konntest</code></td><td><code>konnten</code></td></tr>
+          <tr><td>müssen</td><td><code>musste</code></td><td><code>musstest</code></td><td><code>mussten</code></td></tr>
+          <tr><td>dürfen</td><td><code>durfte</code></td><td><code>durftest</code></td><td><code>durften</code></td></tr>
+          <tr><td>sollen</td><td><code>sollte</code></td><td><code>solltest</code></td><td><code>sollten</code></td></tr>
+          <tr><td>wollen</td><td><code>wollte</code></td><td><code>wolltest</code></td><td><code>wollten</code></td></tr>
+          <tr><td>mögen</td><td><code>mochte</code></td><td><code>mochtest</code></td><td><code>mochten</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Contoh Kalimat</h3>
+    <ul class="examples">
+      <li><span class="de">Er war gestern krank.</span><span class="id">Dia sakit kemarin.</span></li>
+      <li><span class="de">Wir hatten keine Zeit.</span><span class="id">Kami tidak punya waktu.</span></li>
+      <li><span class="de">Das Kind spielte im Garten.</span><span class="id">Anak itu bermain di taman.</span></li>
+      <li><span class="de">Sie fuhren nach München.</span><span class="id">Mereka pergi ke München.</span></li>
+      <li><span class="de">Ich konnte nicht schlafen.</span><span class="id">Saya tidak bisa tidur.</span></li>
+      <li><span class="de">Es war einmal ein König...</span><span class="id">Dahulu kala ada seorang raja...</span></li>
+    </ul>
+  </div>
+
+
+
+</div>
+
+<!-- ========== TAB: PERBANDINGAN ========== -->
+<div class="tab-panel" id="tab-vergleich">
+
+  <div class="section-title">
+    Vergleich <span class="badge">Perfekt vs Präteritum</span>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-col perfekt">
+      <h4>🔵 Perfekt</h4>
+      <ul>
+        <li>Percakapan sehari-hari</li>
+        <li>Chat / pesan singkat</li>
+        <li>Cerita informal lisan</li>
+        <li>Hampir semua verba</li>
+        <li>Bentuk: haben/sein + P.II</li>
+      </ul>
+    </div>
+    <div class="compare-col praet">
+      <h4>🔴 Präteritum</h4>
+      <ul>
+        <li>Tulisan narasi/sastra</li>
+        <li>Berita & laporan resmi</li>
+        <li>Novel, buku cerita</li>
+        <li>sein/haben/Modalverben*</li>
+        <li>Bentuk: Stamm + Endung</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Kalimat yang Sama, Dua Bentuk</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Perfekt (Lisan)</th><th>Präteritum (Tulisan)</th><th>Arti</th></tr></thead>
+        <tbody>
+          <tr><td><code>Ich habe gegessen.</code></td><td><code>Ich aß.</code></td><td><em>Saya makan.</em></td></tr>
+          <tr><td><code>Er hat geschlafen.</code></td><td><code>Er schlief.</code></td><td><em>Dia tidur.</em></td></tr>
+          <tr><td><code>Wir sind gegangen.</code></td><td><code>Wir gingen.</code></td><td><em>Kami pergi.</em></td></tr>
+          <tr><td><code>Sie hat gelesen.</code></td><td><code>Sie las.</code></td><td><em>Dia membaca.</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box green">
+      ✅ <strong>Tips:</strong> Untuk sein & haben, pakai Präteritum di mana saja — bahkan dalam percakapan!<br>
+      "Ich war müde." ✓ &nbsp;|&nbsp; "Ich habe müde gewesen." ✗
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Ringkasan Cepat</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th></th><th>Perfekt</th><th>Präteritum</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Register</strong></td><td>Informal / lisan</td><td>Formal / tulisan</td></tr>
+          <tr><td><strong>Contoh konteks</strong></td><td>Gespräch, SMS, Chat</td><td>Roman, Zeitung, Bericht</td></tr>
+          <tr><td><strong>Bentuk</strong></td><td>2 kata (aux + P.II)</td><td>1 kata (verba terkonjugasi)</td></tr>
+          <tr><td><strong>sein/haben/Modalv.</strong></td><td>Jarang dipakai</td><td>✅ Dipakai di sini</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+</div>
+
+<!-- ========== TAB: LATIHAN ========== -->
+<div class="tab-panel" id="tab-latihan">
+
+  <div class="section-title">
+    Übungen <span class="badge">Quiz Interaktif</span>
+  </div>
+
+  <div id="score-display">
+    <div class="score-stat">
+      <div class="num" id="score-correct">0</div>
+      <div class="label">Benar</div>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-stat">
+      <div class="num" id="score-total">0</div>
+      <div class="label">Dijawab</div>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-stat">
+      <div class="num" id="score-pct">—</div>
+      <div class="label">Skor</div>
+    </div>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <button class="btn-reset" onclick="resetQuiz()">↺ Ulangi Quiz</button>
+</div>
+
+<!-- ========== TAB: PARTIZIP II ========== -->
+<div class="tab-panel" id="tab-partizip">
+
+  <div class="section-title">
+    Partizip II <span class="badge">Referensi</span>
+  </div>
+
+  <div class="builder-wrap">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem;">Cek Partizip II Verba</h3>
+    <div class="builder-input">
+      <input type="text" id="verb-input" placeholder="Ketik infinitiv... (cth: machen)" onkeydown="if(event.key==='Enter')checkPartizip()">
+      <button class="btn-check" onclick="checkPartizip()">Cek →</button>
+    </div>
+    <div class="builder-result" id="partizip-result"></div>
+  </div>
+
+  <div class="card">
+    <h3>Tabel Verba Irregulär Penting</h3>
+    <input type="text" id="irr-search" placeholder="🔍 Cari verba..." oninput="filterTable()">
+    <div class="tbl-wrap">
+      <table id="irr-table">
+        <thead><tr><th>Infinitiv</th><th>Präteritum (ich)</th><th>Partizip II</th><th>Haben/Sein</th></tr></thead>
+        <tbody id="irr-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+</main>
+
+<script>
+// ===== TAB SWITCHING =====
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== QUIZ DATA =====
+const quizData = [
+  {
+    q: 'Ich ___ gestern Pizza gegessen.',
+    blank: '___',
+    options: ['habe', 'bin', 'hatte', 'war'],
+    answer: 0,
+    explain: '✅ "essen" adalah verba transitif → pakai <strong>haben</strong>. Partizip II: gegessen.',
+    category: 'Perfekt: haben/sein'
+  },
+  {
+    q: 'Wir ___ nach Hamburg gefahren.',
+    blank: '___',
+    options: ['haben', 'sind', 'waren', 'hatten'],
+    answer: 1,
+    explain: '✅ "fahren" adalah verba gerak berpindah tempat → pakai <strong>sein</strong>. Partizip II: gefahren.',
+    category: 'Perfekt: haben/sein'
+  },
+  {
+    q: 'Es war einmal... → Teks ini menggunakan bentuk...',
+    blank: null,
+    options: ['Perfekt', 'Präteritum', 'Präsens', 'Futur'],
+    answer: 1,
+    explain: '✅ Teks narasi / dongeng menggunakan <strong>Präteritum</strong>. "war" = Präteritum dari sein.',
+    category: 'Perfekt vs Präteritum'
+  },
+  {
+    q: '"Ich ___ keine Zeit." — dalam percakapan sehari-hari.',
+    blank: '___',
+    options: ['habe gehabt', 'hatte', 'habe', 'bin'],
+    answer: 1,
+    explain: '✅ haben dalam percakapan sehari-hari TETAP menggunakan <strong>Präteritum: hatte</strong>.',
+    category: 'Pengecualian: haben'
+  },
+  {
+    q: 'Partizip II dari "schreiben" adalah...',
+    blank: null,
+    options: ['geschreibt', 'geschrieben', 'schreibt', 'schrieben'],
+    answer: 1,
+    explain: '✅ "schreiben" adalah verba irregulär → <strong>geschrieben</strong>. (schreiben – schrieb – geschrieben)',
+    category: 'Partizip II'
+  },
+  {
+    q: 'Sie ___ letzte Woche krank.',
+    blank: '___',
+    options: ['ist gewesen', 'hat gewesen', 'war', 'ist'],
+    answer: 2,
+    explain: '✅ "sein" dalam kalimat → selalu pakai <strong>Präteritum: war</strong>. Bukan "ist gewesen".',
+    category: 'Pengecualian: sein'
+  },
+  {
+    q: 'Bentuk Präteritum "können" (ich) adalah...',
+    blank: null,
+    options: ['konnte', 'könnte', 'gekonnt', 'kann'],
+    answer: 0,
+    explain: '✅ Modalverb "können" → Präteritum: <strong>konnte</strong>. (kein Umlaut!)',
+    category: 'Modalverben'
+  },
+  {
+    q: 'Das Kind ___ im Garten gespielt. (Perfekt)',
+    blank: '___',
+    options: ['ist', 'war', 'hat', 'hatte'],
+    answer: 2,
+    explain: '✅ "spielen" adalah verba biasa (tidak berpindah tempat) → <strong>hat</strong> gespielt.',
+    category: 'Perfekt: haben/sein'
+  },
+  {
+    q: 'Partizip II dari "gehen" (mit sein) adalah...',
+    blank: null,
+    options: ['gegangen', 'gegehen', 'gegeht', 'ging'],
+    answer: 0,
+    explain: '✅ "gehen" adalah verba irregulär: gehen – ging – <strong>gegangen</strong> (pakai sein).',
+    category: 'Partizip II'
+  },
+  {
+    q: 'Dalam teks berita/Zeitung, bentuk yang digunakan adalah...',
+    blank: null,
+    options: ['Perfekt', 'Präteritum', 'Keduanya sama', 'Tergantung verba'],
+    answer: 1,
+    explain: '✅ Teks berita, laporan, dan tulisan formal menggunakan <strong>Präteritum</strong>.',
+    category: 'Perfekt vs Präteritum'
+  }
+];
+
+let correct = 0, answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  quizData.forEach((q, qi) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-card';
+    div.id = 'q' + qi;
+    const questionText = q.blank
+      ? q.q.replace('___', `<span class="blank">___</span>`)
+      : q.q;
+    div.innerHTML = `
+      <div class="quiz-number">Pertanyaan ${qi+1} · ${q.category}</div>
+      <div class="quiz-question">${questionText}</div>
+      <div class="quiz-options">
+        ${q.options.map((opt, oi) => `
+          <button class="quiz-option" onclick="answer(${qi},${oi})">
+            <span class="key">${String.fromCharCode(65+oi)}</span>
+            ${opt}
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb${qi}"></div>
+    `;
+    container.appendChild(div);
+  });
+  updateScore();
+}
+
+function answer(qi, oi) {
+  const card = document.getElementById('q' + qi);
+  const btns = card.querySelectorAll('.quiz-option');
+  const fb = document.getElementById('fb' + qi);
+  if (card.dataset.answered) return;
+  card.dataset.answered = '1';
+  answered++;
+  const q = quizData[qi];
+  btns.forEach(b => b.disabled = true);
+  if (oi === q.answer) {
+    btns[oi].classList.add('correct');
+    fb.className = 'quiz-feedback show correct';
+    fb.innerHTML = q.explain;
+    correct++;
+  } else {
+    btns[oi].classList.add('wrong');
+    btns[q.answer].classList.add('correct');
+    fb.className = 'quiz-feedback show wrong';
+    fb.innerHTML = `❌ Jawaban yang benar: <strong>${q.options[q.answer]}</strong><br>${q.explain}`;
+  }
+  updateScore();
+}
+
+function updateScore() {
+  document.getElementById('score-correct').textContent = correct;
+  document.getElementById('score-total').textContent = answered;
+  document.getElementById('score-pct').textContent = answered > 0
+    ? Math.round(correct/answered*100) + '%' : '—';
+}
+
+function resetQuiz() {
+  correct = 0; answered = 0;
+  buildQuiz();
+}
+
+// ===== IRREGULAR VERBS TABLE =====
+const irregulars = [
+  ['sein','war','gewesen','sein'],
+  ['haben','hatte','gehabt','haben'],
+  ['werden','wurde','geworden','sein'],
+  ['gehen','ging','gegangen','sein'],
+  ['kommen','kam','gekommen','sein'],
+  ['fahren','fuhr','gefahren','sein'],
+  ['fliegen','flog','geflogen','sein'],
+  ['laufen','lief','gelaufen','sein'],
+  ['bleiben','blieb','geblieben','sein'],
+  ['sehen','sah','gesehen','haben'],
+  ['schreiben','schrieb','geschrieben','haben'],
+  ['lesen','las','gelesen','haben'],
+  ['essen','aß','gegessen','haben'],
+  ['trinken','trank','getrunken','haben'],
+  ['schlafen','schlief','geschlafen','haben'],
+  ['sprechen','sprach','gesprochen','haben'],
+  ['nehmen','nahm','genommen','haben'],
+  ['geben','gab','gegeben','haben'],
+  ['finden','fand','gefunden','haben'],
+  ['denken','dachte','gedacht','haben'],
+  ['wissen','wusste','gewusst','haben'],
+  ['bringen','brachte','gebracht','haben'],
+  ['stehen','stand','gestanden','haben'],
+  ['liegen','lag','gelegen','haben'],
+  ['sitzen','saß','gesessen','haben'],
+  ['treffen','traf','getroffen','haben'],
+  ['helfen','half','geholfen','haben'],
+  ['rufen','rief','gerufen','haben'],
+  ['schwimmen','schwamm','geschwommen','sein'],
+  ['aufwachen','wachte auf','aufgewacht','sein'],
+];
+
+function buildTable() {
+  const tbody = document.getElementById('irr-body');
+  irregulars.forEach(([inf,praet,p2,aux]) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${inf}</td><td><code>${praet}</code></td><td><code>${p2}</code></td><td style="color:${aux==='sein'?'var(--red)':'var(--blue)'};font-weight:600">${aux}</td>`;
+    tr.dataset.search = inf + praet + p2;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterTable() {
+  const q = document.getElementById('irr-search').value.toLowerCase();
+  document.querySelectorAll('#irr-body tr').forEach(tr => {
+    tr.style.display = tr.dataset.search.includes(q) ? '' : 'none';
+  });
+}
+
+// ===== PARTIZIP CHECKER =====
+const partizipMap = {};
+irregulars.forEach(([inf,,p2,aux]) => partizipMap[inf] = {p2, aux});
+const regularRules = [
+  // trennbar irregular — handled above
+  // simple regular
+  {test: v => true, fn: v => 'ge' + v.replace(/en$|n$/, '') + 't'}
+];
+
+function checkPartizip() {
+  const v = document.getElementById('verb-input').value.trim().toLowerCase();
+  const el = document.getElementById('partizip-result');
+  if (!v) { el.className='builder-result'; return; }
+  if (partizipMap[v]) {
+    const {p2, aux} = partizipMap[v];
+    el.className = 'builder-result show ok';
+    el.innerHTML = `✅ <strong>${v}</strong> → Partizip II: <strong>${p2}</strong> &nbsp;|&nbsp; Hilfsverb: <strong>${aux}</strong>`;
+  } else {
+    // simple regular guess
+    let stamm = v.replace(/en$/, '').replace(/n$/, '');
+    let p2 = 'ge' + stamm + 't';
+    el.className = 'builder-result show ok';
+    el.innerHTML = `📘 <strong>${v}</strong> kemungkinan reguler → Partizip II: <strong>${p2}</strong><br><small style="color:#666">Pastikan dicek di kamus jika tidak yakin.</small>`;
+  }
+}
+
+// ===== INIT =====
+buildQuiz();
+buildTable();
+</script>
+
+<!-- FOOTER -->
+<footer style="
+  background: #1a1a2e;
+  color: rgba(245,240,232,0.75);
+  padding: 3rem 1.5rem;
+  margin-top: 2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.8;
+">
+  <div style="max-width:900px;margin:0 auto;">
+
+    <!-- Tujuan -->
+    <div style="
+      border-left: 4px solid #c9a84c;
+      padding-left: 1.25rem;
+      margin-bottom: 2rem;
+    ">
+      <div style="
+        font-family:'DM Mono',monospace;
+        font-size:0.7rem;
+        text-transform:uppercase;
+        letter-spacing:0.12em;
+        color:#c9a84c;
+        margin-bottom:0.4rem;
+      ">Tujuan Pembuatan</div>
+      <p style="color:rgba(245,240,232,0.9);font-size:0.95rem;">
+        Website ini dibuat untuk memenuhi tugas <strong style="color:#c9a84c">Ujian Akhir Semester (UAS)</strong> mata kuliah 
+        <strong style="color:#c9a84c">A.D. Medien 2026</strong> sebagai media pembelajaran interaktif 
+        materi Perfekt dan Präteritum dalam Bahasa Jerman.
+      </p>
+    </div>
+
+    <!-- Grid sumber: 2 kartu -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-bottom:2rem;">
+
+      <!-- Claude AI (gabungan materi + pemrograman) -->
+      <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:1.25rem;border:1px solid rgba(255,255,255,0.08);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:#c9a84c;margin-bottom:0.75rem;">✦ Pemrograman & Materi</div>
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+          <div style="background:#c9a84c;color:#1a1a2e;border-radius:6px;padding:0.4rem 0.6rem;font-size:1.3rem;line-height:1;flex-shrink:0;">✦</div>
+          <div>
+            <div style="font-weight:600;color:rgba(245,240,232,0.95);">Claude AI</div>
+            <div style="font-size:0.82rem;color:rgba(245,240,232,0.5);">Anthropic · claude.ai</div>
+            <div style="font-size:0.82rem;margin-top:0.4rem;color:rgba(245,240,232,0.65);">
+              Pemrograman website (HTML, CSS, JavaScript), ide materi, contoh kalimat, dan kalimat-kalimat untuk soal latihan.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub Pages -->
+      <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:1.25rem;border:1px solid rgba(255,255,255,0.08);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:#c9a84c;margin-bottom:0.75rem;">🔗 Hosting & Link</div>
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+          <div style="background:#c9a84c;color:#1a1a2e;border-radius:6px;padding:0.4rem 0.6rem;font-size:1.3rem;line-height:1;flex-shrink:0;">⊙</div>
+          <div>
+            <div style="font-weight:600;color:rgba(245,240,232,0.95);">GitHub Pages</div>
+            <div style="font-size:0.82rem;color:rgba(245,240,232,0.5);">github.com · pages</div>
+            <div style="font-size:0.82rem;margin-top:0.4rem;color:rgba(245,240,232,0.65);">
+              Publikasi dan hosting website secara gratis melalui layanan GitHub Pages.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Daftar Pustaka -->
+    <div style="margin-bottom:2rem;">
+      <div style="font-family:'DM Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:#c9a84c;margin-bottom:0.75rem;">📖 Daftar Pustaka</div>
+      <ol style="padding-left:1.2rem;font-size:0.83rem;color:rgba(245,240,232,0.65);line-height:2.2;">
+        <li>Dudenredaktion. (2009). <em>Duden – Die Grammatik</em> (8. Aufl., Bd. 4). Dudenverlag. <a href="https://www.duden.de/sprachwissen/sprachratgeber/Perfekt-vs-Praeteritum" target="_blank" style="color:#c9a84c;text-decoration:none;">duden.de</a></li>
+        <li>Wikipedia. (2024). <em>Perfekt im Deutschen</em>. Wikimedia Foundation. <a href="https://de.wikipedia.org/wiki/Perfekt_im_Deutschen" target="_blank" style="color:#c9a84c;text-decoration:none;">de.wikipedia.org</a></li>
+        <li>Lingolia. (2024). <em>Perfekt & Präteritum – Deutsche Grammatik</em>. Lingolia GmbH. <a href="https://deutsch.lingolia.com/de/grammatik/zeiten/perfekt" target="_blank" style="color:#c9a84c;text-decoration:none;">deutsch.lingolia.com</a></li>
+        <li>Deutsche Grammatik 2.0. (2022). <em>Der Gebrauch des Präteritums und des Perfekts</em>. <a href="https://deutschegrammatik20.de/verbformen/der-gebrauch-der-tempora-zeiten/gebrauch-praeteritum-perfekt/" target="_blank" style="color:#c9a84c;text-decoration:none;">deutschegrammatik20.de</a></li>
+        <li>Studyflix. (2025). <em>Präteritum und Perfekt – Unterschied einfach erklärt</em>. Studyflix GmbH. <a href="https://studyflix.de/deutsch/prateritum-perfekt-4749" target="_blank" style="color:#c9a84c;text-decoration:none;">studyflix.de</a></li>
+        <li>Deutsch Perfekt. (2021). <em>Perfekt oder Präteritum?</em> Spotlight Verlag. <a href="https://www.deutsch-perfekt.com/perfekt-oder-praeteritum" target="_blank" style="color:#c9a84c;text-decoration:none;">deutsch-perfekt.com</a></li>
+      </ol>
+    </div>
+
+    <!-- Divider -->
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;">
+      <div>
+        <div style="font-weight:600;color:rgba(245,240,232,0.9);font-size:0.9rem;">Tias Fitri Anggraini</div>
+        <div style="font-size:0.8rem;color:rgba(245,240,232,0.4);">UAS A.D. Medien · 2026</div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.75rem;color:rgba(245,240,232,0.3);text-align:right;">
+        Perfekt & Präteritum<br>Materi Interaktif Bahasa Jerman
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
